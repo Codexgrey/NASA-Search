@@ -1,16 +1,16 @@
 # Getting Started with Create React App
 
 ## Road to nasa-lookup-cc
-- create-react-app
-- figure out dependencies
-- install required dependencies e.g Axios, Router (react) etc...
-- setup API integration
-- figure out components
-- configure components
-- setup routes/routing
-- style app
-- test 
-- deploy
+-create-react-app
+-figure out dependencies
+-install required dependencies e.g Axios, Router (react) ...
+-setup API integration
+-figure out components
+-configure components
+-setup routes/routing
+-style app
+-test
+-deploy
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
