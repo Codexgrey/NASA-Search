@@ -5,9 +5,9 @@ import AssetDetail from "./components/AssetDetail";
 
 const App = () => {
     /*
-      fetching assets dynamically in AssetDetail.js, removed selectedAsset. 
+      fetching assets dynamically in AssetDetail.js, w/ using state [selectedAsset]. 
       - state to keep track of the selected asset
-      const [selectedAsset, setSelectedAsset] = useState(null); 
+        const [selectedAsset, setSelectedAsset] = useState(null); 
     */
 
     return (
