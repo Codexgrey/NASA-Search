@@ -10,6 +10,7 @@
 -configure components |
 -setup routes/routing |
 -style app |
+-pagination
 -test |
 -deploy |
 

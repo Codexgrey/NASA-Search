@@ -1,7 +1,7 @@
 /* Container styling for the search section */
 .search-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto;    /* center container */
     padding: 20px;
     text-align: center;
 }
@@ -32,7 +32,7 @@
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer;   /* clickable */
     font-size: 16px;
     transition: background 0.3s;
 }
@@ -74,13 +74,13 @@
     padding: 10px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s; /* hover transitions */
 }
 
 
 .result-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* subtle shadows */
 }
 
 
