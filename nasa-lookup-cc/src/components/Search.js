@@ -32,7 +32,7 @@ const Search = () => {
                 // debugging API URL
             const apiUrl = `https://images-api.nasa.gov/search?q=${query}&media_type=${mediaTypes.join(',')}`;
             console.log("Fetching data from:", apiUrl); 
-            
+
                 // debugging API response
             const response = await axios.get(apiUrl);
             console.log("API Response:", response.data); 
@@ -56,8 +56,7 @@ const Search = () => {
         <div className="search-container">
             <div className="search-controls">
                 {/* input field for user's search query */}
-                NASA Search 
-                <br/>
+                <h5> NASA Search </h5>
                 <input 
                     type="text"
                     value={query}                                 // controlled input field with state binding
@@ -90,7 +89,7 @@ const Search = () => {
             <div className="results-grid">
                 {results.map((item) => (                    // each result must have a unique id 
                     <div className="result-card" key={item.data[0].nasa_id} onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}>      
-                        <h3>{item.data[0].title}</h3>       {/* display asset title */}
+                        <h5>{item.data[0].title}</h5>       {/* display asset title */}
 
                         {/* display media if available */}
                         {item.links && item.links[0] && (
@@ -114,8 +113,8 @@ export default Search;
 /*
     Resolved the following fetching and performance issues
     - Initially used useState in App.js to store selectedAsset, but when navigating to /asset/:id, 
-      the page refreshes, and selectedAsset resets to null. 
-      This results in AssetDetail not receiving any asset data.
+      the page refreshes, and selectedAsset becomes null. 
+      This results in AssetDetail not receiving any {asset} data.
       Also, Search.js was not passing onSelectAsset to update selectedAsset.
 
         * Search.js: Decided on using navigate hook when navigating to /asset/:id 
