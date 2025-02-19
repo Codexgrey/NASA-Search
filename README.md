@@ -2,8 +2,7 @@
 
 nasa-lookup-cc/               \
 ├── public/                   \
-├── src/                      \
-
+├── src/                      
 │   ├── components/           \
 │   │   ├── Search.css        \
 │   │   ├── Search.js         \
@@ -15,6 +14,5 @@ nasa-lookup-cc/               \
 ├── .env                      \
 ├── .gitignore                \
 ├── package-lock.json         \
-├── package.json              \
- 
-├── README.md                 \
+├── package.json              
+├── README.md                 
