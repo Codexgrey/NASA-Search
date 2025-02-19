@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // axios for making HTTP requests
 import axios from "axios"; 
+import "./Search.css"; 
 
 
 
@@ -34,32 +35,45 @@ const Search = () => {
   
 
     return (
-        <div className="Search">
-            {/* input field for user's search query */}
-            <input 
-                type="text"
-                value={query}                                 // controlled input field with state binding
-                onChange={(e) => setQuery(e.target.value)}    // updates query state on user input
-                placeholder="Search for assets..."           
-            />
-            
-            {/* button to trigger the searchAssets */}
-            <button onClick={searchAssets}>Search</button>
+        <div className="search-container">
+            <div className="search-controls">
+                {/* input field for user's search query */}
+                NASA Search 
+                <br/>
+                <input 
+                    type="text"
+                    value={query}                                 // controlled input field with state binding
+                    onChange={(e) => setQuery(e.target.value)}    // updates query state on user input
+                    placeholder="Search for assets..." 
+                    className="search-input"          
+                />
+                
+                {/* button to trigger the searchAssets */}
+                <button onClick={searchAssets} className="search-button">Search</button>
+                <br />
+                
+                <div className="filters" >
+                    <label>
+                        <input type="checkbox"  /> Images
+                    </label>
+                    <label>
+                        <input type="checkbox"  /> Audio
+                    </label>
+                </div>
+            </div>
 
-  
-            {/* display search results */}
-            <div>
+            {/* grid-display search results */}
+            <div className="results-grid">
                 {results.map((item) => (                    // each result must have a unique id 
-                    <div key={item.data[0].nasa_id} onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}>      
+                    <div className="result-card" key={item.data[0].nasa_id} onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}>      
                         <h3>{item.data[0].title}</h3>       {/* display asset title */}
-                        <p>{item.data[0].description}</p>   {/* display asset description */}
 
                         {/* render media if available */}
-                        {item.links && (
+                        {item.links && item.links[0] && (
                             <img
                             src={item.links[0].href}        // image URL from API response
                             alt={item.data[0].title}        // Alt text for accessibility
-                            style={{ width: "200px" }}      // set width for images
+                            className="result-image"   
                             />
                         )}
                     </div>
@@ -67,7 +81,6 @@ const Search = () => {
             </div>
         </div>
     );
-
 };
   
 // export component for external use
