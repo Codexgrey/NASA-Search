@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Technical-Assessment-CC/nasa-lookup-cc/static/css/main.9b0a254c.css",
-    "main.js": "/Technical-Assessment-CC/nasa-lookup-cc/static/js/main.b4af9953.js",
-    "index.html": "/Technical-Assessment-CC/nasa-lookup-cc/index.html",
-    "main.9b0a254c.css.map": "/Technical-Assessment-CC/nasa-lookup-cc/static/css/main.9b0a254c.css.map",
-    "main.b4af9953.js.map": "/Technical-Assessment-CC/nasa-lookup-cc/static/js/main.b4af9953.js.map"
+    "main.css": "/Technical-Assessment-CC/static/css/main.9b0a254c.css",
+    "main.js": "/Technical-Assessment-CC/static/js/main.b4af9953.js",
+    "index.html": "/Technical-Assessment-CC/index.html",
+    "main.9b0a254c.css.map": "/Technical-Assessment-CC/static/css/main.9b0a254c.css.map",
+    "main.b4af9953.js.map": "/Technical-Assessment-CC/static/js/main.b4af9953.js.map"
   },
   "entrypoints": [
     "static/css/main.9b0a254c.css",
