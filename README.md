@@ -1,4 +1,4 @@
-## Road to nasa-lookup-cc
+## ROADMAP: nasa-lookup-cc
 - create-react-app 
 - figure out dependencies 
 - install required dependencies e.g Axios, Router (react) ... 
