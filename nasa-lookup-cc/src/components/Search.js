@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // axios for making HTTP requests
 import "./Search.css"; 
@@ -28,39 +28,46 @@ const Search = () => {
         try {
             // array of image & audio assets   
             const mediaTypes = [];
-            if (filter.image) mediaTypes.push("image");  // error: push(filter.image)
-            if (filter.audio) mediaTypes.push("audio");  // error: push(filter.audio)
+            if (filter.image) mediaTypes.push("image");     // error: push(filter.image)
+            if (filter.audio) mediaTypes.push("audio");     // error: push(filter.audio)
 
             // API endpoint with search query and media type filter
-                // debugging API URL
             const apiUrl = `https://images-api.nasa.gov/search?q=${query}&media_type=${mediaTypes.join(',')}`;
-            console.log("Fetching data from:", apiUrl); 
+            console.log("Fetching data from:", apiUrl);     // debugging API URL
 
-                // debugging API response
             const response = await axios.get(apiUrl);
-            console.log("API Response:", response.data); 
-            /* 
-                const response = await axios.get(
-                    `https://images-api.nasa.gov/search?q=${query}&media_type=${mediaTypes.join(",")}` 
-                );
-            */ 
+            console.log("API Response:", response.data);    // debugging API response
+        
             // update the results state with fetched data 
-            // ensure results are properly set. if response is null, default to []
-            setResults(response.data.collection.items || []); 
+            setResults(response.data.collection.items || []); // set results properly; if response is null, default to []
             setCurrentPage(1);
+            // save results using localstorage (to navigate back)
+            localStorage.setItem("searchResults", JSON.stringify(response.data.collection.items || [])); // save results
+            localStorage.setItem("searchQuery", query); // save query             
             
         }   catch (error) {
-            // log request errors
-            console.error("Error fetching data from NASA API", error); 
+            console.error("Error fetching data from NASA API", error);       // log request errors
         }
     };
+
+
+    // useEffect to handle localstorage
+    useEffect(() => {
+        const savedResults = JSON.parse(localStorage.getItem("searchResults"));
+        const savedQuery = localStorage.getItem("searchQuery");
+
+        // load saved results when component mounts
+        if (savedResults) setResults(savedResults);
+        if (savedQuery) setQuery(savedQuery);
+    }, []);
+    
     
     // get assets for current page
-    const lastAssetIndex = currentPage * assetsPerPage;                     // 2 * 12 
-    const firstAssetIndex = lastAssetIndex - assetsPerPage;                 // 24 - 12
+    const lastAssetIndex = currentPage * assetsPerPage;                      // 2 * 12 
+    const firstAssetIndex = lastAssetIndex - assetsPerPage;                  // 24 - 12
     const currentResults = results.slice(firstAssetIndex, lastAssetIndex);   // slicing to paginate results
 
-    // Change page
+    // Change page, update currentPage
     const nextPage = () => { if (lastAssetIndex < results.length) setCurrentPage(currentPage + 1); };
     const prevPage = () => { if (currentPage > 1) setCurrentPage(currentPage - 1); };
 
@@ -123,11 +130,15 @@ const Search = () => {
             
                 
             {/* pagination controls */}
-            {results.length > assetsPerPage && (
+            {results.length > assetsPerPage && ( // checkinng if results length greater than assets per page
                 <div className="pagination">
-                <button onClick={prevPage} disabled={currentPage === 1} className="pagination-button">Previous</button>
-                <span>Page {currentPage} of {Math.ceil(results.length / assetsPerPage)}</span>
-                <button onClick={nextPage} disabled={lastAssetIndex >= results.length} className="pagination-button">Next</button>
+                    <button onClick={prevPage}  disabled={currentPage === 1} className="pagination-button">
+                        Previous
+                    </button>
+                    <span>Page {currentPage} of {Math.ceil(results.length / assetsPerPage)}</span>
+                    <button onClick={nextPage}  disabled={lastAssetIndex >= results.length} className="pagination-button">
+                        Next
+                    </button>
                 </div>
             )}
         </div>
