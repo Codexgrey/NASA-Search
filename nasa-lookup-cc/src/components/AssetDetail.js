@@ -30,7 +30,7 @@ const AssetDetail = () => {
     // fetch new asset when the ID changes
     }, [id]); 
 
-    
+
     // if no asset is provided, display a message
     if (!asset) return <div className="asset-detail-container">Please select an asset...</div>;
 

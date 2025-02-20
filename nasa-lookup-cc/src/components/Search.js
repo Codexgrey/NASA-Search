@@ -60,13 +60,21 @@ const Search = () => {
         // load saved results when component mounts
         if (savedResults) setResults(savedResults);
         if (savedQuery) setQuery(savedQuery);
+
+         // Clear localStorage when the page is reloaded
+        const clearStorageOnReload = () => {
+            localStorage.removeItem("searchResults");
+            localStorage.removeItem("searchQuery");
+        };
+
+        window.addEventListener("beforeunload", clearStorageOnReload);
+        return () => {
+            window.removeEventListener("beforeunload", clearStorageOnReload);
+        };
     }, []);
     
 
-    // clear localstorage on refresh
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
+
 
 
     // get assets for current page
