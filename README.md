@@ -5,7 +5,7 @@
 - setup API integration 
 - setup gitignore for sensitive data
 - figure out components 
-- configure components: Search.js, Asset.js
+- configure components: Search.js, AssetDetail.js
 - setup routes/routing 
 - style components 
 - pagination
