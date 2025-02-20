@@ -61,7 +61,13 @@ const Search = () => {
         if (savedQuery) setQuery(savedQuery);
     }, []);
     
-    
+
+    // clear localstorage on refresh
+    useEffect(() => {
+        localStorage.clear();
+    }, []);
+
+
     // get assets for current page
     const lastAssetIndex = currentPage * assetsPerPage;                      // 2 * 12 
     const firstAssetIndex = lastAssetIndex - assetsPerPage;                  // 24 - 12
