@@ -84,10 +84,12 @@
     transition: transform 0.2s, box-shadow 0.2s; /* hover transitions */
 }
 
-
+/* prevent text from expanding outside card */
 .results-grid h5 {
     text-wrap: balance;
+    overflow: hidden;       
 }
+
 
 .result-card:hover {
     transform: scale(1.05);
