@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// axios for making HTTP requests
-import axios from "axios"; 
+import axios from "axios"; // axios for making HTTP requests
 import "./Search.css"; 
 
 
@@ -45,8 +44,8 @@ const Search = () => {
                     `https://images-api.nasa.gov/search?q=${query}&media_type=${mediaTypes.join(",")}` 
                 );
             */ 
-            // update the results state with fetched data
-                // ensure results are properly set
+            // update the results state with fetched data 
+            // ensure results are properly set. if response is null, default to []
             setResults(response.data.collection.items || []); 
             setCurrentPage(1);
             
@@ -108,8 +107,10 @@ const Search = () => {
                             key={item.data[0].nasa_id} 
                             onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}
                         >      
-                            {/* display asset title and available media */} 
+                            {/* display asset title */} 
                             <h5>{item.data[0].title}</h5>
+
+                            {/* render available media if item contains media links */}
                             {item.links && item.links[0] && (
                                 // image URL from API response & Alt text for accessibility
                                 <img src={item.links[0].href} alt={item.data[0].title} className="result-image" />

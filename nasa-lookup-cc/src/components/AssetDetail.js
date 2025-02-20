@@ -12,7 +12,6 @@ const AssetDetail = () => {
     const [asset, setAsset] = useState(null);
     const navigate = useNavigate();
 
-
     /*
         changed approach of relying on selectedAsset from App.js, 
         fetching the asset data dynamically using useParams instead 
@@ -38,18 +37,15 @@ const AssetDetail = () => {
 
     return (
         <div className="asset-detail-container">
-            {/* Back button */}
+            {/* back button */}
             <button className="back-button" onClick={() => navigate("/")}> Back </button>
             <h3 className="asset-title">{asset.data[0].title}</h3>              {/* display asset title */}
             <p className="asset-description">{asset.data[0].description}</p>    {/* display asset description */}
            
             {/* render image if asset contains media links */}
-            {asset.links && (                   
-                <img
-                src={asset.links[0].href}       // image source URL from asset
-                alt={asset.data[0].title}       // Alt text for accessibility
-                className="asset-media"      
-                />
+            {asset.links && ( 
+                // image URL from API response & Alt text for accessibility                  
+                <img src={asset.links[0].href} alt={asset.data[0].title} className="asset-media" />
             )}
         </div>
     );
