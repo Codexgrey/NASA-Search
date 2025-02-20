@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/NASA_Lookup/static/css/main.9b0a254c.css",
-    "main.js": "/NASA_Lookup/static/js/main.dfaf2dbf.js",
-    "index.html": "/NASA_Lookup/index.html",
-    "main.9b0a254c.css.map": "/NASA_Lookup/static/css/main.9b0a254c.css.map",
-    "main.dfaf2dbf.js.map": "/NASA_Lookup/static/js/main.dfaf2dbf.js.map"
+    "main.css": "/Technical-Assessment-CC/NASA_Lookup/static/css/main.9b0a254c.css",
+    "main.js": "/Technical-Assessment-CC/NASA_Lookup/static/js/main.dfaf2dbf.js",
+    "index.html": "/Technical-Assessment-CC/NASA_Lookup/index.html",
+    "main.9b0a254c.css.map": "/Technical-Assessment-CC/NASA_Lookup/static/css/main.9b0a254c.css.map",
+    "main.dfaf2dbf.js.map": "/Technical-Assessment-CC/NASA_Lookup/static/js/main.dfaf2dbf.js.map"
   },
   "entrypoints": [
     "static/css/main.9b0a254c.css",
