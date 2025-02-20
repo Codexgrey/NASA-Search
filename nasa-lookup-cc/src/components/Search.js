@@ -16,6 +16,10 @@ const Search = () => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const [filter, setFilter] = useState({ image: true, audio: true });
+    
+    // pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const assetsPerPage = 12;
 
     // useNavigate hook to navigate to asset details page
     const navigate = useNavigate(); 
@@ -44,13 +48,22 @@ const Search = () => {
             // update the results state with fetched data
                 // ensure results are properly set
             setResults(response.data.collection.items || []); 
-
+            setCurrentPage(1);
+            
         }   catch (error) {
             // log request errors
             console.error("Error fetching data from NASA API", error); 
         }
     };
-  
+    
+    // get assets for current page
+    const lastAssetIndex = currentPage * assetsPerPage;                     // 2 * 12 
+    const firstAssetIndex = lastAssetIndex - assetsPerPage;                 // 24 - 12
+    const currentResults = results.slice(firstAssetIndex, lastAssetIndex);   // slicing to paginate results
+
+    // Change page
+    const nextPage = () => { if (lastAssetIndex < results.length) setCurrentPage(currentPage + 1); };
+    const prevPage = () => { if (currentPage > 1) setCurrentPage(currentPage - 1); };
 
     return (
         <div className="search-container">
@@ -85,23 +98,37 @@ const Search = () => {
                 </div>
             </div>
 
+
             {/* grid-display search results */}
             <div className="results-grid">
-                {results.map((item) => (                    // each result must have a unique id 
-                    <div className="result-card" key={item.data[0].nasa_id} onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}>      
-                        <h5>{item.data[0].title}</h5>       {/* display asset title */}
-
-                        {/* display media if available */}
-                        {item.links && item.links[0] && (
-                            <img
-                            src={item.links[0].href}        // image URL from API response
-                            alt={item.data[0].title}        // Alt text for accessibility
-                            className="result-image"   
-                            />
-                        )}
-                    </div>
-                ))}
+                {/* IF to display current results */}
+                { currentResults.length > 0 ?
+                    ( currentResults.map((item) => (                    // each result must have a unique id 
+                        <div className="result-card" 
+                            key={item.data[0].nasa_id} 
+                            onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}
+                        >      
+                            {/* display asset title and available media */} 
+                            <h5>{item.data[0].title}</h5>
+                            {item.links && item.links[0] && (
+                                // image URL from API response & Alt text for accessibility
+                                <img src={item.links[0].href} alt={item.data[0].title} className="result-image" />
+                            )}
+                        </div>
+                        ))
+                    ) : ( <p>No results found. <br /> Search for something else...</p> )
+                }
             </div>
+            
+                
+            {/* Pagination Controls */}
+            {results.length > assetsPerPage && (
+                <div className="pagination">
+                <button onClick={prevPage} disabled={currentPage === 1} className="pagination-button">Previous</button>
+                <span>Page {currentPage} of {Math.ceil(results.length / assetsPerPage)}</span>
+                <button onClick={nextPage} disabled={lastAssetIndex >= results.length} className="pagination-button">Next</button>
+                </div>
+            )}
         </div>
     );
 };
@@ -122,8 +149,4 @@ export default Search;
           no need for {asset} in App.js.
         * Performance improvements: The component now fetches asset details only when the asset ID changes,
           reducing unnecessary API requests; Using useEffect hook to fetch dynamically on ID changes.
-        
-        - Implemented conditional rendering to display a message when no asset is provided.
-        - Rendered image if asset contains media links.
-        - Used Axios for making API requests.
 */
