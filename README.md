@@ -1,13 +1,13 @@
 ## ROADMAP: nasa-lookup-cc
 - create-react-app 
 - figure out dependencies 
-- install required dependencies e.g Axios, Router (react) ... 
+- install required dependencies e.g Axios, Router (react)... 
 - setup API integration 
 - setup gitignore for sensitive data
 - figure out components 
-- configure components 
+- configure components: Search.js, Asset.js
 - setup routes/routing 
-- style app 
+- style components 
 - pagination
 - localstorage
 - test 
