@@ -1,7 +1,7 @@
 {
   "name": "nasa-lookup-cc",
   "version": "0.1.0",
-  "homepage": "https://Codexgrey.github.io/NASA-Lookup-CC",
+  "homepage": "https://Codexgrey.github.io/NASA-Search/nasa-lookup-cc",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
