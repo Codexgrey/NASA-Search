@@ -85,9 +85,9 @@
 }
 
 
-/* .result-card h5 {
+.results-grid h5 {
     text-wrap: balance;
-} */
+}
 
 .result-card:hover {
     transform: scale(1.05);
