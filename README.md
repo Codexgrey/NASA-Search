@@ -25,7 +25,6 @@ nasa-lookup-cc/               \
 │   │   ├── AssetDetail.js    \
 │   ├── App.js                \
 │   ├── index.js              \
-│   ├── App.css               \
 ├── .env                      \
 ├── .gitignore                \
 ├── package-lock.json         \
