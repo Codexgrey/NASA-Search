@@ -14,7 +14,7 @@ const Search = () => {
     */ 
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
-    const [filter, setFilter] = useState({ image: true, audio: true });
+    const [filter, setFilter] = useState({ image: false, audio: false, video: true });
     
     // pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +30,8 @@ const Search = () => {
             const mediaTypes = [];
             if (filter.image) mediaTypes.push("image");     // error: push(filter.image)
             if (filter.audio) mediaTypes.push("audio");     // error: push(filter.audio)
-
+            if (filter.video) mediaTypes.push("video"); 
+                 
             // API endpoint with search query and media type filter
             const apiUrl = `https://images-api.nasa.gov/search?q=${query}&media_type=${mediaTypes.join(',')}`;
             console.log("Fetching data from:", apiUrl);     // debugging API URL
