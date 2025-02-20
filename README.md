@@ -8,13 +8,13 @@
 - configure components 
 - setup routes/routing 
 - style app 
-- pagination 
+- pagination
+- localstorage
 - test 
 - deploy 
 
 
 ## Project Structure          
-
 nasa-lookup-cc/               \
 ├── public/                   \
 ├── src/                      
