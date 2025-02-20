@@ -11,10 +11,10 @@ const App = () => {
     */
 
     return (
-        <Router>
+        <Router basename="/Technical-Assessment-CC/nasa-lookup-cc">
             <Routes>
                 {/* route: search page, passing a function to update selected asset */}
-                <Route path="/" element={<Search />} />                 {/* onSelectAsset={setSelectedAsset} */} 
+                <Route path="/" element={<Search />} /> {/* onSelectAsset={setSelectedAsset} */} 
                 
                 {/* route: asset details page, passing the selected asset */}
                 <Route path="/asset/:id" element={<AssetDetail />}  />  {/* asset={selectedAsset}  */}
