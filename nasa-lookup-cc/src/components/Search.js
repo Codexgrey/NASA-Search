@@ -74,9 +74,6 @@ const Search = () => {
     }, []);
     
 
-
-
-
     // get assets for current page
     const lastAssetIndex = currentPage * assetsPerPage;                      // 2 * 12 
     const firstAssetIndex = lastAssetIndex - assetsPerPage;                  // 24 - 12
