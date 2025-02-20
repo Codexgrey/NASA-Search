@@ -121,7 +121,7 @@ const Search = () => {
             </div>
             
                 
-            {/* Pagination Controls */}
+            {/* pagination controls */}
             {results.length > assetsPerPage && (
                 <div className="pagination">
                 <button onClick={prevPage} disabled={currentPage === 1} className="pagination-button">Previous</button>

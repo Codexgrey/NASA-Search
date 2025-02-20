@@ -39,7 +39,7 @@ const AssetDetail = () => {
     return (
         <div className="asset-detail-container">
             {/* Back button */}
-            <button className="back-button" onClick={() => navigate(-1)}> Back </button>
+            <button className="back-button" onClick={() => navigate("/")}> Back </button>
             <h3 className="asset-title">{asset.data[0].title}</h3>              {/* display asset title */}
             <p className="asset-description">{asset.data[0].description}</p>    {/* display asset description */}
            
