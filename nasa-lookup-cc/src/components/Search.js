@@ -61,7 +61,7 @@ const Search = () => {
         if (savedResults) setResults(savedResults);
         if (savedQuery) setQuery(savedQuery);
 
-         // Clear localStorage when the page is reloaded
+        // Clear localStorage when the page is manually reloaded
         const clearStorageOnReload = () => {
             localStorage.removeItem("searchResults");
             localStorage.removeItem("searchQuery");
