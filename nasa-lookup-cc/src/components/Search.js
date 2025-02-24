@@ -165,6 +165,18 @@ const Search = () => {
 export default Search; 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     Resolved the following fetching and performance issues
     - Initially used useState in App.js to store selectedAsset, but when navigating to /asset/:id, 

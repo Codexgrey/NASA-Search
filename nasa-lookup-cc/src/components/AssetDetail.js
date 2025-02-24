@@ -54,6 +54,15 @@ const AssetDetail = () => {
 export default AssetDetail; 
 
 
+
+
+
+
+
+
+
+
+
 /*
     Resolved the following fetching and performance issues
     - Initially used useState in App.js to store selectedAsset, but when navigating to /asset/:id, 
@@ -66,8 +75,5 @@ export default AssetDetail;
           no need for {asset} in App.js.
         * Performance improvements: The component now fetches asset details only when the asset ID changes,
           reducing unnecessary API requests; Using useEffect hook to fetch dynamically on ID changes.
-        
-        - Implemented conditional rendering to display a message when no asset is provided.
-        - Rendered image if asset contains media links.
-        - Used Axios for making API requests.
+
 */
