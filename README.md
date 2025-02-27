@@ -20,6 +20,7 @@ nasa-lookup-cc/               \
 ## TO RUN
 - `git clone repository`
 - `cd nasa-lookup-cc` 
+- `npm install`
 - `npm start`
 
 

@@ -12,10 +12,6 @@ const AssetDetail = () => {
     const [asset, setAsset] = useState(null);
     const navigate = useNavigate();
 
-    /*
-        changed approach of relying on selectedAsset from App.js, 
-        fetching the asset data dynamically using useParams instead 
-    */
     useEffect(() => {
         const fetchAsset = async () => {
             try {
@@ -50,7 +46,6 @@ const AssetDetail = () => {
     );
 };
 
-// export component for external use
 export default AssetDetail; 
 
 
@@ -63,18 +58,3 @@ export default AssetDetail;
 
 
 
-/*
-    Notes:
-    Resolved the following fetching and performance issues
-    - Initially used useState in App.js to store selectedAsset, but when navigating to /asset/:id, 
-      the page refreshes, and selectedAsset resets to null. 
-      This results in AssetDetail not receiving any asset data.
-      Also, Search.js was not passing onSelectAsset to update selectedAsset.
-
-        * Search.js: Decided on using navigate hook when navigating to /asset/:id 
-        * AssetDetail.js: The component now fetches asset details dynamically using useParams,
-          no need for {asset} in App.js.
-        * The component now fetches asset details only when the asset ID changes,
-          reducing unnecessary API requests; Using useEffect hook to fetch dynamically on ID changes.
-
-*/

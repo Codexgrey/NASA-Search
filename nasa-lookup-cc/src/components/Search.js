@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // axios for making HTTP requests
+import axios from "axios";
 import "./Search.css"; 
 
 
@@ -42,12 +42,13 @@ const Search = () => {
             // update the results state with fetched data 
             setResults(response.data.collection.items || []); // set results properly; if response is null, default to []
             setCurrentPage(1);
+
             // save results using localstorage (to navigate back)
             localStorage.setItem("searchResults", JSON.stringify(response.data.collection.items || [])); // save results
             localStorage.setItem("searchQuery", query); // save query             
             
         }   catch (error) {
-            console.error("Error fetching data from NASA API", error);       // log request errors
+            console.error("Error fetching data from NASA API", error); // log request errors
         }
     };
 
@@ -125,7 +126,7 @@ const Search = () => {
             <div className="results-grid">
                 {/* IF to display current results */}
                 { currentResults.length > 0 ?
-                    ( currentResults.map((item) => (                    // each result must have a unique id 
+                    ( currentResults.map((item) => ( // each result must have a unique id 
                         <div className="result-card" 
                             key={item.data[0].nasa_id} 
                             onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}
@@ -146,7 +147,7 @@ const Search = () => {
             
                 
             {/* pagination controls */}
-            {results.length > assetsPerPage && ( // checkinng if results length greater than assets per page
+            {results.length > assetsPerPage && ( // checking if results length greater than assets per page
                 <div className="pagination">
                     <button onClick={prevPage}  disabled={currentPage === 1} className="pagination-button">
                         Previous
@@ -161,7 +162,7 @@ const Search = () => {
     );
 };
   
-// export component for external use
+
 export default Search; 
 
 
@@ -177,17 +178,3 @@ export default Search;
 
 
 
-/*
-    Notes:
-    Resolved the following fetching and performance issues
-    - Initially used useState in App.js to store selectedAsset, but when navigating to /asset/:id, 
-      the page refreshes, and selectedAsset becomes null. 
-      This results in AssetDetail not receiving any {asset} data.
-      Also, Search.js was not passing onSelectAsset to update selectedAsset.
-
-        * Search.js: Decided on using navigate hook when navigating to /asset/:id 
-        * AssetDetail.js: The component now fetches asset details dynamically using useParams,
-          no need for {asset} in App.js.
-        * The component now fetches asset details only when the asset ID changes,
-          reducing unnecessary API requests; Using useEffect hook to fetch dynamically on ID changes.
-*/
