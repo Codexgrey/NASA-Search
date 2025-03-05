@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Search.css"; 
+import Pagination from "./Paginate.js";
 
 
 
@@ -79,10 +80,7 @@ const Search = () => {
     const lastAssetIndex = currentPage * assetsPerPage;                      // 2 * 12 
     const firstAssetIndex = lastAssetIndex - assetsPerPage;                  // 24 - 12
     const currentResults = results.slice(firstAssetIndex, lastAssetIndex);   // slicing to paginate results
-
-    // Change page, update currentPage
-    const nextPage = () => { if (lastAssetIndex < results.length) setCurrentPage(currentPage + 1); };
-    const prevPage = () => { if (currentPage > 1) setCurrentPage(currentPage - 1); };
+    
 
     return (
         <div className="search-container">
@@ -147,16 +145,14 @@ const Search = () => {
             
                 
             {/* pagination controls */}
-            {results.length > assetsPerPage && ( // checking if results length greater than assets per page
+            {results.length > assetsPerPage && ( // checking if results length greater than assets per page 
                 <div className="pagination">
-                    <button onClick={prevPage}  disabled={currentPage === 1} className="pagination-button">
-                        Previous
-                    </button>
-
-                    <span>Page {currentPage} of {Math.ceil(results.length / assetsPerPage)}</span>
-                    <button onClick={nextPage}  disabled={lastAssetIndex >= results.length} className="pagination-button">
-                        Next
-                    </button>
+                    <Pagination
+                        totalAssets={results.length}
+                        assetsPerPage={assetsPerPage}
+                        setCurrentPage={setCurrentPage}
+                        currentPage={currentPage}
+                    />
                 </div>
             )}
         </div>

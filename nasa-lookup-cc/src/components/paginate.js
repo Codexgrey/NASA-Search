@@ -1,13 +1,13 @@
 import React from "react";
 
-import "./Pagination.css";
+import "./Paginate.css";
 
 const Pagination = ({
     totalAssets,
     assetsPerPage,
     setCurrentPage,
     currentPage,
-}) => {
+    }) => {
     let pages = [];
 
     for (let i = 1; i <= Math.ceil(totalAssets / assetsPerPage); i++) {
