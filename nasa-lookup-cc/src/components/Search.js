@@ -152,6 +152,7 @@ const Search = () => {
                     <button onClick={prevPage}  disabled={currentPage === 1} className="pagination-button">
                         Previous
                     </button>
+
                     <span>Page {currentPage} of {Math.ceil(results.length / assetsPerPage)}</span>
                     <button onClick={nextPage}  disabled={lastAssetIndex >= results.length} className="pagination-button">
                         Next
