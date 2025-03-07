@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Search.css"; 
 import Pagination from "./Paginate.js";
@@ -20,9 +20,9 @@ const Search = () => {
     // pagination
     const [currentPage, setCurrentPage] = useState(1);
     const assetsPerPage = 12;
-
-    // useNavigate hook to navigate to asset details page
     const navigate = useNavigate(); 
+    const location = useLocation();
+
   
     // function to fetch assets from the NASA API
     const searchAssets = async () => {
@@ -35,18 +35,19 @@ const Search = () => {
 
             // API endpoint with search query and media type filter
             const apiUrl = `https://images-api.nasa.gov/search?q=${query}&media_type=${mediaTypes.join(',')}`;
-            console.log("Fetching data from:", apiUrl);     // debugging API URL
+            // console.log("Fetching data from:", apiUrl);     // debugging API URL
 
             const response = await axios.get(apiUrl);
-            console.log("API Response:", response.data);    // debugging API response
+            // console.log("API Response:", response.data);    // debugging API response
         
             // update the results state with fetched data 
             setResults(response.data.collection.items || []); // set results properly; if response is null, default to []
             setCurrentPage(1);
 
-            // save results using localstorage (to navigate back)
-            localStorage.setItem("searchResults", JSON.stringify(response.data.collection.items || [])); // save results
-            localStorage.setItem("searchQuery", query); // save query             
+            // save results, query, currpage using localstorage
+            localStorage.setItem("searchResults", JSON.stringify(response.data.collection.items || [])); 
+            localStorage.setItem("searchQuery", query);     
+            localStorage.setItem("currentPage", "1");         
             
         }   catch (error) {
             console.error("Error fetching data from NASA API", error); // log request errors
@@ -56,12 +57,15 @@ const Search = () => {
 
     // useEffect to handle localstorage
     useEffect(() => {
+        // get results from localStorage
         const savedResults = JSON.parse(localStorage.getItem("searchResults"));
         const savedQuery = localStorage.getItem("searchQuery");
+        const savedPage = localStorage.getItem("currentPage");
 
         // load saved results when component mounts
         if (savedResults) setResults(savedResults);
         if (savedQuery) setQuery(savedQuery);
+        if (savedPage) setCurrentPage(parseInt(savedPage, 10));
 
         // Clear localStorage when the page is manually reloaded
         const clearStorageOnReload = () => {
@@ -74,13 +78,29 @@ const Search = () => {
             window.removeEventListener("beforeunload", clearStorageOnReload);
         };
     }, []);
+
+
+    // update URL with currentPage number, when currentPage changes
+    useEffect(() => {
+        navigate(`/?page=${currentPage}`)
+    }, [currentPage, navigate]);
+
+
+    // get currentPage number from URL, update currentPage with it, save to local storage
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        const savedPage = urlParams.get("page") || localStorage.getItem("currentPage") || "1";
+
+        setCurrentPage(parseInt(savedPage, 10));
+        localStorage.setItem("currentPage", savedPage);
+    }, [location.search]); 
     
 
     // get assets for current page
     const lastAssetIndex = currentPage * assetsPerPage;                      // 2 * 12 
     const firstAssetIndex = lastAssetIndex - assetsPerPage;                  // 24 - 12
     const currentResults = results.slice(firstAssetIndex, lastAssetIndex);   // slicing to paginate results
-    
+
 
     return (
         <div className="search-container">
@@ -142,7 +162,6 @@ const Search = () => {
                     ) : ( <p>No results found. <br /> Search for something else...</p> )
                 }
             </div>
-            
                 
             {/* pagination controls */}
             {results.length > assetsPerPage && ( // checking if results length greater than assets per page 
@@ -165,7 +184,7 @@ export default Search;
 
 
 
-
+// location.search = represents the query string portion of the URL (e.g ?page=3)
 
 
 
