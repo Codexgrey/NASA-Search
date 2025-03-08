@@ -36,8 +36,8 @@ nasa-lookup-cc/               \
 - configure components: Search.js, AssetDetail.js
 - setup routes/routing 
 - style components 
-- pagination
-- localstorage
+- pagination: Paginate.js
+- localstorage for persistent data
 - test
 
 
