@@ -3,10 +3,12 @@ nasa-lookup-cc/               \
 ├── public/                   \
 ├── src/                      
 │   ├── components/           \
-│   │   ├── Search.css        \
-│   │   ├── Search.js         \
 │   │   ├── AssetDetail.css   \
 │   │   ├── AssetDetail.js    \
+│   │   ├── Paginate.css      \
+│   │   ├── Paginate.js       \
+│   │   ├── Search.css        \
+│   │   ├── Search.js         \
 │   ├── App.js                \
 │   ├── index.js              \
 ├── .env                      \
@@ -40,8 +42,6 @@ nasa-lookup-cc/               \
 
 
 ## `TODOLIST`:
-- return to results page onClick of back button in AssetDetail.js; \
-    with filters still applied, correct page number and right set of results in pagination...\
 - video, audio playback...
 - deploy 
 
