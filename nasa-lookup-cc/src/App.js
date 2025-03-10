@@ -11,7 +11,7 @@ const App = () => {
     */
 
     return (
-        <Router> 
+        <Router basename="/NASA-Search/"> 
             <Routes>
                 <Route path="/" element={<Search />} />
                 <Route path="/asset/:id" element={<AssetDetail />}  /> 
