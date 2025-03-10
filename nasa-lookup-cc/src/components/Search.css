@@ -37,7 +37,7 @@
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;   /* clickable */
+    cursor: pointer;   /* pointer */
     font-size: 16px;
     transition: background 0.3s;
 }
@@ -69,13 +69,13 @@
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, auto));  /* max = 1fr */
+    grid-template-columns : repeat(auto-fit, minmax(200px, auto));  /* max = 1fr */
     gap: 30px;
     margin-top: 30px;
 }
 
 
-.result-card {
+.result-card, .play {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
@@ -84,16 +84,23 @@
     transition: transform 0.2s, box-shadow 0.2s; /* hover transitions */
 }
 
+
+.play {
+    color: white;
+    background-color: skyblue;
+}
+
+
+.result-card:hover, .playback:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* subtle shadows */
+}
+
+
 /* prevent text from expanding outside card */
 .results-grid h5 {
     text-wrap: balance;
     overflow: hidden;       
-}
-
-
-.result-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* subtle shadows */
 }
 
 

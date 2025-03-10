@@ -145,7 +145,8 @@ const Search = () => {
                 {/* IF to display current results */}
                 { currentResults.length > 0 ?
                     ( currentResults.map((item) => ( // each result must have a unique id 
-                        <div className="result-card" 
+                        <div className={(item.data?.[0]?.media_type === "audio" ||
+                            item.data[0].media_type === "video") ? "result-card play" : "result-card"} 
                             key={item.data[0].nasa_id} 
                             onClick={() => navigate(`/asset/${item.data[0].nasa_id}`)}
                         >      

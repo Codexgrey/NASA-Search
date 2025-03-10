@@ -26,6 +26,10 @@ nasa-lookup-cc/               \
 - `npm start`
 
 
+## CARD COLORS
+- images : `White`
+- Audio, Video: `Skyblue`
+
 ## ROADMAP: nasa-lookup-cc
 - create-react-app 
 - figure out dependencies 
