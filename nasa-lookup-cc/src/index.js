@@ -10,3 +10,4 @@ root.render(
   </React.StrictMode>
 );
 
+// "npm run build && copy ..\\deploy\\index.html build\\"
