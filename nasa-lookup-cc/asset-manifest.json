@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/NASA-Search/nasa-lookup-cc/static/css/main.2e13eac7.css",
+    "main.js": "/NASA-Search/nasa-lookup-cc/static/js/main.568b7bb8.js",
+    "index.html": "/NASA-Search/nasa-lookup-cc/index.html",
+    "main.2e13eac7.css.map": "/NASA-Search/nasa-lookup-cc/static/css/main.2e13eac7.css.map",
+    "main.568b7bb8.js.map": "/NASA-Search/nasa-lookup-cc/static/js/main.568b7bb8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2e13eac7.css",
+    "static/js/main.568b7bb8.js"
+  ]
+}
