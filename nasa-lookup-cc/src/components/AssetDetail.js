@@ -69,7 +69,7 @@ const AssetDetail = () => {
             <button className="back-button" onClick={handleBack}> Back </button>
             {/* display asset title, description */}
             <h3 className="asset-title">{asset.data[0].title}</h3>              
-            <p className="asset-description">{limTxt(asset.data[0].description, 1250)}</p> 
+            <p className="asset-description">{limTxt(asset.data[0].description, 1500)}</p> 
            
             {/* render media based on type */}
             {asset.links && asset.links[0] && (
