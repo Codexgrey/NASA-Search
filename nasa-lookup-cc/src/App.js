@@ -7,7 +7,6 @@ const App = () => {
     /*
       fetching assets dynamically in AssetDetail.js, w/ using state [selectedAsset]. 
        const [selectedAsset, setSelectedAsset] = useState(null); 
-       basename="/NASA-Search/nasa-lookup-cc"
     */
 
     return (
