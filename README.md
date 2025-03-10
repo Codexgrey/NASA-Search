@@ -1,3 +1,7 @@
+## Live at
+- https://codexgrey.github.io/NASA-Search/
+
+
 ## Project Structure          
 nasa-lookup-cc/               \
 ├── public/                   \
@@ -47,7 +51,6 @@ nasa-lookup-cc/               \
 
 ## `TODOLIST`:
 - audio playback...
-- deploy 
 
 `Feel free to add your own changes or help me out with my todolist...`
 
