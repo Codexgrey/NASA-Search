@@ -111,6 +111,26 @@
 }
 
 
+.cosmos, .nothing {
+    font-size: 16px;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    width: 300px;
+    height: 80px;
+    padding-top: 14px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+
+.cosmos:hover,.nothing:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 /* 
 .pagination {
     display: flex;

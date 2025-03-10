@@ -81,14 +81,14 @@ const AssetDetail = () => {
                     { mediaType === "video" && mediaUrl && ( 
                         <video controls className="asset-video"> 
                             <source src={mediaUrl} type="video/mp4" />
-                            It seems your browser does not support video elements
+                            It seems your browser does not support video elements.
                         </video>
                     )}
 
                     { mediaType === "audio" && mediaUrl && (
                         <audio controls className="asset-audio">
                             <source src={mediaUrl} type={mediaUrl.endsWith(".mp3") ? "audio/mpeg" : "audio/mp4"} />
-                            It seems your browser does not support audio elements
+                            It seems your browser does not support audio elements.
                         </audio>
                     )}
 

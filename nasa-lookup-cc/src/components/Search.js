@@ -160,7 +160,9 @@ const Search = () => {
                             )}
                         </div>
                         ))
-                    ) : ( <p>No results found. <br /> Search for something else...</p> )
+                    ) : ( !query ? 
+                        <p className="cosmos"> Welcome to the Cosmos &#127756; <br/> Let's explore the universe &#128269; ?</p> : 
+                        <p className="nothing">No results found &#10060; <br /> Please try something else...</p> )
                 }
             </div>
                 
