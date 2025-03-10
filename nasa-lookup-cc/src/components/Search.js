@@ -109,7 +109,7 @@ const Search = () => {
                 <h5> NASA Search </h5>
                 <input 
                     type="text"
-                    value={query}                                 // controlled input field with state binding
+                    value={query}                                 // control input field, state binding
                     onChange={(e) => setQuery(e.target.value)}    // updates query state on user input
                     placeholder="Search for assets..." 
                     className="search-input"          

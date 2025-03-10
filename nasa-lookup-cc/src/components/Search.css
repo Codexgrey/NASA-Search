@@ -149,15 +149,4 @@
     cursor: pointer;
     transition: background 0.3s;
 }
-
-.pagination-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.pagination-button:hover:not(:disabled) {
-    background-color: white;
-    color: #007bff;
-    border: 1px solid #007bff;
-}
 */
