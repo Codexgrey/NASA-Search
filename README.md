@@ -1,8 +1,9 @@
-## Live at
+# LIVE AT:
 - https://codexgrey.github.io/NASA-Search/
 
 
-## Project Structure          
+
+## PROJECT STRUCTURE
 nasa-lookup-cc/               \
 ├── public/                   \
 ├── src/                      
@@ -31,7 +32,7 @@ nasa-lookup-cc/               \
 
 
 ## CARD COLORS
-- images : `White`
+- Images : `White`
 - Audio, Video: `Skyblue`
 
 ## ROADMAP: nasa-lookup-cc
@@ -49,11 +50,9 @@ nasa-lookup-cc/               \
 - test
 
 
-## `TODOLIST`:
+## TODOLIST:
 - audio playback...
-
 `Feel free to add your own changes or help me out with my todolist...`
 
 
-
-
+## ENJOY! 🥂
