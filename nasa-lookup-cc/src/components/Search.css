@@ -130,6 +130,17 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+p strong {
+    font-size: 18px;
+    color: skyblue;
+    font-weight: bold;
+}
+
+
+
+
+
+
 
 /* 
 .pagination {

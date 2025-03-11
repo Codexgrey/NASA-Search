@@ -116,11 +116,12 @@ const Search = () => {
             <div className="search-controls">
                 {/* input field for user's search query */}
                 <h5> NASA Search </h5>
+                <p>Please <strong>select</strong> media type(s) before clicking search.</p>
                 <input 
                     type="text"
                     value={query}                                 // control input field, state binding
                     onChange={(e) => setQuery(e.target.value)}    // updates query state on user input
-                    placeholder="Search for assets..." 
+                    placeholder="What do you want to find?" 
                     className="search-input"          
                 />
                 
@@ -170,7 +171,7 @@ const Search = () => {
                         </div>
                         ))
                     ) : !searching ? ( 
-                        <p className="cosmos"> Welcome to the Cosmos &#127756; <br/> Let's explore the universe &#128269; ?</p> 
+                        <p className="cosmos"> Welcome to the Cosmos &#127756; <br/> Let's begin our exploration &#128269; </p> 
                     ) : (
                         <p className="nothing">No results found &#10060; <br /> Please try something else...</p> 
                     )     
