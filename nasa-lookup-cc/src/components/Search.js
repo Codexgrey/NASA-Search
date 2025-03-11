@@ -14,6 +14,7 @@ const Search = () => {
     state [filter]: to store the media type filter settings (images, audio)
     */ 
     const [query, setQuery] = useState("");
+    const [searching, setSearching] = useState(false);
     const [results, setResults] = useState([]);
     const [filter, setFilter] = useState({ image: false, audio: false, video: false });
     
@@ -43,6 +44,7 @@ const Search = () => {
             // update the results state with fetched data 
             setResults(response.data.collection.items || []); // set results properly; if response is null, default to []
             setCurrentPage(1);
+            setSearching(true);
 
             // save results, query, currpage using localstorage
             localStorage.setItem("searchResults", JSON.stringify(response.data.collection.items || [])); 
@@ -84,6 +86,13 @@ const Search = () => {
     useEffect(() => {
         navigate(`/?page=${currentPage}`)
     }, [currentPage, navigate]);
+
+
+    // handle welcome and "no results" message only if query state changes
+    useEffect(() => {
+        // reset searching where query changes
+        if (query) setSearching(false);
+    }, [query]);
 
 
     // get currentPage number from URL, update currentPage with it, save to local storage
@@ -160,9 +169,11 @@ const Search = () => {
                             )}
                         </div>
                         ))
-                    ) : ( !query ? 
-                        <p className="cosmos"> Welcome to the Cosmos &#127756; <br/> Let's explore the universe &#128269; ?</p> : 
-                        <p className="nothing">No results found &#10060; <br /> Please try something else...</p> )
+                    ) : !searching ? ( 
+                        <p className="cosmos"> Welcome to the Cosmos &#127756; <br/> Let's explore the universe &#128269; ?</p> 
+                    ) : (
+                        <p className="nothing">No results found &#10060; <br /> Please try something else...</p> 
+                    )     
                 }
             </div>
                 
