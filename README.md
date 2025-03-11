@@ -29,7 +29,7 @@ nasa-lookup-cc/               \
 - `cd nasa-lookup-cc` 
 - `npm install`
 - `npm start`
-- View app in your local environment at - `http://localhost:[port]/nasa-lookup-cc`
+- View app in your local environment at - `http://localhost:[port]/NASA-Search/nasa-lookup-cc/`
 
 
 ## CARD COLORS
