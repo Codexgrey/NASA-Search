@@ -3,118 +3,144 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AssetDetail.css";
 
-
-// component to display details of a selected NASA asset
-    // fetching asset dynamically via useParams 
-const AssetDetail = () => {   
-    // get asset id from URL (url parameter - nasa_id: /asset/nasa_id)
-    const { id } = useParams(); 
+const AssetDetail = () => {
+    const { id } = useParams();
     const [asset, setAsset] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const [mediaUrl, setMediaUrl] = useState("");  // store media url
+    const [mediaUrl, setMediaUrl] = useState("");
+
+    const [audioLoading, setAudioLoading] = useState(true);
+    const [audioError, setAudioError] = useState(false);
 
     useEffect(() => {
         const fetchAsset = async () => {
             try {
                 const response = await axios.get(`https://images-api.nasa.gov/search?nasa_id=${id}`);
-                // set the first item found
-                setAsset(response.data.collection.items[0]); 
+                setAsset(response.data.collection.items[0]);
 
-                // fetch video/audio file URL
+                // Get asset metadata
                 const mediaResponse = await axios.get(`https://images-api.nasa.gov/asset/${id}`);
                 const mediaItems = mediaResponse.data.collection.items;
-                //console.log("Media Items:", mediaItems);
-                
-                // find the first available MP4 (video) or MP3, m4a (audio) file
-                const playback = mediaItems.find(item =>
-                    item.href.endsWith(".mp4") || item.href.endsWith(".mp3") || item.href.endsWith(".m4a")
-                );
+
+                // Look for playable media files
+                const playback = mediaItems.find(item => {
+                    const href = item.href.toLowerCase();
+                    return href.endsWith('.mp4') || href.endsWith('.mp3') ||
+                        href.endsWith('.m4a') || href.endsWith('.wav');
+                });
 
                 if (playback) {
-                    setMediaUrl(playback.href); 
+                    const secureUrl = playback.href.replace('http://', 'https://');
+                    setMediaUrl(encodeURI(secureUrl));
+
+                    // Set timeout for audio loading
+                    if (playback.href.match(/\.(mp3|wav|m4a)$/i)) {
+                        const timeoutId = setTimeout(() => {
+                            setAudioLoading(false);
+                            setAudioError(true);
+                        }, 25000);
+
+                        // Cleanup timeout if component unmounts
+                        return () => clearTimeout(timeoutId);
+                    }
                 }
 
-            }   catch (error) {
-                console.error("Error fetching asset details", error);
+            } catch (error) {
+                console.error("Error fetching asset details:", error);
+                setAudioError(true);
+                setAudioLoading(false);
             }
         };
         fetchAsset();
-    // fetch new asset when id changes
-    }, [id]); 
+    }, [id]);
 
-    // get page number from the URL or localStorage
     const queryParams = new URLSearchParams(location.search);
     const storedPage = queryParams.get("page") || localStorage.getItem("currentPage") || "1";
 
     const handleBack = () => {
-        navigate(`/?page=${storedPage}`); // ,{replace: true}
+        navigate(`/?page=${storedPage}`);
     };
-    // debug storedPage
-    //console.log(`Navigating back to page: ${storedPage}`);
 
     if (!asset) return <div className="asset-detail-container">Loading...</div>;
     const mediaType = asset.data?.[0]?.media_type || "unknown";
 
-    // limit description text
     const limTxt = (text, maxLength) => {
-        if (!text) return ""; 
+        if (!text) return "";
         return text.length > maxLength ? text.slice(0, maxLength) + " ..." : text;
     };
 
+    const handleAudioLoaded = () => {
+        setAudioLoading(false);
+        setAudioError(false);
+    };
+
+    const handleAudioError = () => {
+        setAudioLoading(false);
+        setAudioError(true);
+    };
 
     return (
         <div className="asset-detail-container">
-            {/* back button */}
             <button className="back-button" onClick={handleBack}> Back </button>
-            {/* display asset title, description */}
-            <h3 className="asset-title">{asset.data[0].title}</h3>              
-            <p className="asset-description">{limTxt(asset.data[0].description, 1500)}</p> 
-           
-            {/* render media based on type */}
-            {asset.links && asset.links[0] && (
-                <>
-                    { mediaType === "image" && ( 
-                        <img src={asset.links[0].href} alt={asset.data[0].title} className="asset-media" />
-                    )}
+            <h3 className="asset-title">{asset.data[0].title}</h3>
+            <p className="asset-description">{limTxt(asset.data[0].description)}</p>
 
-                    { mediaType === "video" && mediaUrl && ( 
-                        <video controls className="asset-video"> 
-                            <source src={mediaUrl} type="video/mp4" />
-                            It seems your browser does not support video elements.
-                        </video>
-                    )}
+            <>
+                {mediaType === "image" && (
+                    <img
+                        src={asset.links[0].href}
+                        alt={asset.data[0].title}
+                        className="asset-media"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://via.placeholder.com/400x300?text=Image+Not+Available";
+                        }}
+                    />
+                )}
 
-                    { mediaType === "audio" && mediaUrl && (
-                        <audio controls className="asset-audio">
-                            <source src={mediaUrl} type={mediaUrl.endsWith(".mp3") ? "audio/mpeg" : "audio/mp4"} />
-                            It seems your browser does not support audio elements.
+                {console.log("here")}
+                {mediaType === "video" && mediaUrl && (
+                    <video controls className="asset-video">
+                        <source src={mediaUrl} type="video/mp4" />
+                        <source src={mediaUrl} type="video/webm" />
+                        <p>Your browser does not support video playback.</p>
+                    </video>
+                )}
+                {mediaType === "audio" && mediaUrl && (
+                    <div className="asset-audio">
+                        {audioLoading && (
+                            <div className="loading-spinner">
+                                <div className="spinner"></div>
+                                <p>Loading audio file...</p>
+                            </div>
+                        )}
+
+                        <audio
+                            controls
+                            preload="auto"
+                            crossOrigin="anonymous"
+                            className="asset-audio"
+                            onLoadedData={handleAudioLoaded}
+                            onError={handleAudioError}
+                            style={{ display: audioLoading ? 'none' : 'block' }}
+                        >
+                            <source src={mediaUrl} type="audio/mpeg" />
+                            <source src={mediaUrl} type="audio/wav" />
+                            <p>Your browser does not support audio playback.</p>
                         </audio>
-                    )}
 
-                    {!mediaUrl && (mediaType === "video" || mediaType === "audio") && (
-                        <p>Media file not available.</p>
-                    )}
-                </>              
-            )}
+                        {audioError && (
+                            <div className="media-error">
+                                <p>Failed to load audio file. Please try again later.</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </>
+
         </div>
     );
 };
 
-export default AssetDetail; 
-
-
-
-
-
-// const {id} = useParams; 
-/*
-    extract url params from react router
-    example URL	/asset/56789 → id = "56789"
-*/
-
-
-
-
-
-
+export default AssetDetail;
