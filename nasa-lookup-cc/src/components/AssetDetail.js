@@ -21,18 +21,20 @@ const AssetDetail = () => {
                 // set the first item found
                 setAsset(response.data.collection.items[0]); 
 
-                // fetch video/audio file URL
+                // get asset metadata
                 const mediaResponse = await axios.get(`https://images-api.nasa.gov/asset/${id}`);
                 const mediaItems = mediaResponse.data.collection.items;
-                //console.log("Media Items:", mediaItems);
+                // console.log("Media Items:", mediaItems);
                 
                 // find the first available MP4 (video) or MP3, m4a (audio) file
                 const playback = mediaItems.find(item =>
-                    item.href.endsWith(".mp4") || item.href.endsWith(".mp3") || item.href.endsWith(".m4a")
+                    item.href.endsWith(".mp4") || item.href.endsWith(".mp3") || 
+                    item.href.endsWith(".m4a") || item.href.endsWith(".wav") 
                 );
 
                 if (playback) {
-                    setMediaUrl(playback.href); 
+                    console.log(playback.href);
+                    setMediaUrl(playback.href);
                 }
 
             }   catch (error) {
@@ -86,8 +88,12 @@ const AssetDetail = () => {
                     )}
 
                     { mediaType === "audio" && mediaUrl && (
-                        <audio controls className="asset-audio">
-                            <source src={mediaUrl} type={mediaUrl.endsWith(".mp3") ? "audio/mpeg" : "audio/mp4"} />
+                        <audio controls  className="asset-audio">
+                            <source src={mediaUrl} type={ 
+                                mediaUrl.endsWith(".mp3") ? "audio/mpeg" :
+                                mediaUrl.endsWith(".m4a") ? "audio/mp4" :
+                                mediaUrl.endsWith(".wav") ? "audio/wav" :
+                                "audio/*" } />
                             It seems your browser does not support audio elements.
                         </audio>
                     )}
