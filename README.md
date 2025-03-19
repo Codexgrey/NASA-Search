@@ -52,8 +52,6 @@ nasa-lookup-cc/               \
 
 
 ## TODOLIST:
-- audio playback...\
-`Feel free to add your own changes or help me out with my todolist...`
-
+- completed!
 
 ## ENJOY! 🥂
