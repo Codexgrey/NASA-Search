@@ -14,6 +14,8 @@ nasa-lookup-cc/               \
 │   │   ├── Paginate.js       \
 │   │   ├── Search.css        \
 │   │   ├── Search.js         \
+│   │   ├── Spinner.css       \
+│   │   ├── Spinner.js        \
 │   ├── App.js                \
 │   ├── index.js              \
 ├── .env                      \
@@ -48,6 +50,7 @@ nasa-lookup-cc/               \
 - style components 
 - pagination: Paginate.js
 - localstorage for persistent data
+- spinner
 - test
 
 

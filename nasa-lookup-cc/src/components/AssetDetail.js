@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AssetDetail.css";
+import Spinner from "./spinner.js";
 
 
 const AssetDetail = () => {   
@@ -47,7 +48,7 @@ const AssetDetail = () => {
                             setAudioLoading(false);
                             setVideoError(true);
                             setAudioError(true);
-                        }, 10000);
+                        }, 5000);
 
                         // clear timeout when component unmounts
                         return () => clearTimeout(timeout);
@@ -133,12 +134,7 @@ const AssetDetail = () => {
 
                 { mediaType === "video" && mediaUrl && ( 
                     <div className="asset-video">
-                        { videoLoading && (
-                            <div className="loading-spinner">
-                                <div className="spinner"></div>
-                                <p>Loading video asset...</p>
-                            </div>
-                        )}
+                        { videoLoading && <Spinner />}
 
                         <video 
                             controls className="video-asset"
@@ -155,12 +151,7 @@ const AssetDetail = () => {
 
                 { mediaType === "audio" && mediaUrl && (
                     <div className="asset-audio">
-                        { audioLoading && (
-                            <div className="loading-spinner">
-                                <div className="spinner"></div>
-                                <p>Loading audio asset...</p>
-                            </div>
-                        )}
+                        { audioLoading && <Spinner />}
 
                         <audio 
                             controls preload="auto"
