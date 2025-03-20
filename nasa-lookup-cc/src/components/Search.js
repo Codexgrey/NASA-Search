@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Search.css"; 
 import Spinner from "./spinner.js";
 import Pagination from "./Paginate.js";
+import { FaHome } from "react-icons/fa";
 
 
 
@@ -69,17 +70,7 @@ const Search = () => {
         if (savedResults) setResults(savedResults);
         if (savedQuery) setQuery(savedQuery);
         if (savedPage) setCurrentPage(parseInt(savedPage, 10));
-
-        // Clear localStorage when the page is manually reloaded
-        const clearStorageOnReload = () => {
-            localStorage.removeItem("searchResults");
-            localStorage.removeItem("searchQuery");
-        };
-
-        window.addEventListener("beforeunload", clearStorageOnReload);
-        return () => {
-            window.removeEventListener("beforeunload", clearStorageOnReload);
-        };
+        
     }, []);
 
 
@@ -114,8 +105,20 @@ const Search = () => {
     return (
         <div className="search-container">
             <div className="search-controls">
-                <h5> NASA Search </h5>
-                <p>Enter query and <strong>select media type(s) </strong> to enable search.</p>
+                <div className="header">
+                    <FaHome 
+                        onClick={() => {
+                            localStorage.clear(); 
+                            window.location.reload(); 
+                        }} 
+                        className="home-icon"
+                        title="Home" 
+                    />
+                    <h5> NASA Search </h5>
+                </div>
+        
+                <p>Enter query and <strong>select media type(s) </strong> to enable search. </p>
+
                 <input 
                     type="text"
                     value={query}                                 
