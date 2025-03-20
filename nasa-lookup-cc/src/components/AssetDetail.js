@@ -19,61 +19,51 @@ const AssetDetail = () => {
     const [audioError, setAudioError] = useState(false);
 
     useEffect(() => {
-        // ensure details persist
-        const storedAsset = JSON.parse(localStorage.getItem(`asset-${id}`));
-        const storedMediaUrl = localStorage.getItem(`mediaUrl-${id}`);
+        const fetchAsset = async () => {
+            try {
+                const response = await axios.get(`https://images-api.nasa.gov/search?nasa_id=${id}`);
+                // set asset
+                setAsset(response.data.collection.items[0]); 
 
-        if (storedAsset) {
-            setAsset(storedAsset);
-            if (storedMediaUrl) setMediaUrl(storedMediaUrl);
-            
-        } else {
-            const fetchAsset = async () => {
-                try {
-                    const response = await axios.get(`https://images-api.nasa.gov/search?nasa_id=${id}`);
-                    // set asset
-                    setAsset(response.data.collection.items[0]); 
-
-                    // get asset metadata
-                    const mediaResponse = await axios.get(`https://images-api.nasa.gov/asset/${id}`);
-                    const mediaItems = mediaResponse.data.collection.items;
-        
-                    // find playable media items
-                    const playback = mediaItems.find(item => {
-                        return item.href.endsWith(".mp4") || item.href.endsWith(".mp3") || 
-                        item.href.endsWith(".m4a") || item.href.endsWith(".wav"); 
-                    });
+                // get asset metadata
+                const mediaResponse = await axios.get(`https://images-api.nasa.gov/asset/${id}`);
+                const mediaItems = mediaResponse.data.collection.items;
+    
+                // find playable media items
+                const playback = mediaItems.find(item => {
+                    return item.href.endsWith(".mp4") || item.href.endsWith(".mp3") || 
+                    item.href.endsWith(".m4a") || item.href.endsWith(".wav"); 
+                });
 
 
-                    if (playback) {
-                        const secureUrl = playback.href.replace('http://', 'https://');
-                        setMediaUrl(encodeURI(secureUrl));
+                if (playback) {
+                    const secureUrl = playback.href.replace('http://', 'https://');
+                    setMediaUrl(encodeURI(secureUrl));
 
 
-                        // set timeout for media loading
-                        if (playback.href.match(/\.(mp4|mp3|wav|m4a)$/i)) {
-                            const timeout = setTimeout(() => {
-                                setVideoLoading(false);
-                                setAudioLoading(false);
-                                setVideoError(true);
-                                setAudioError(true);
-                            }, 5000);
+                    // set timeout for media loading
+                    if (playback.href.match(/\.(mp4|mp3|wav|m4a)$/i)) {
+                        const timeout = setTimeout(() => {
+                            setVideoLoading(false);
+                            setAudioLoading(false);
+                            setVideoError(true);
+                            setAudioError(true);
+                        }, 5000);
 
-                            // clear timeout when component unmounts
-                            return () => clearTimeout(timeout);
-                        }
+                        // clear timeout when component unmounts
+                        return () => clearTimeout(timeout);
                     }
-
-                }   catch (error) {
-                    console.error("Error fetching asset details", error);
-                    setVideoLoading(false);
-                    setAudioLoading(false);
-                    setVideoError(true);
-                    setAudioError(true);
                 }
-            };
-            fetchAsset();
-        }
+
+            }   catch (error) {
+                console.error("Error fetching asset details", error);
+                setVideoLoading(false);
+                setAudioLoading(false);
+                setVideoError(true);
+                setAudioError(true);
+            }
+        };
+        fetchAsset();
     // fetch new asset when id changes
     }, [id]); 
 
