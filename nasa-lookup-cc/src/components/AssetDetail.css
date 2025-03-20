@@ -42,7 +42,7 @@
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
-  /* display: block; */
+  display: block;
   border-radius: 10px;
   padding: 20px;
   background-color: #ddd;
@@ -50,12 +50,14 @@
 }
 
 .video-asset {
-  max-width: 560px;
-  /* margin: 0 auto; */
+  border-radius: inherit;
+  display: inherit;
+  max-width: 100%;
+  height: auto;
 }
 
 .audio-asset {
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
