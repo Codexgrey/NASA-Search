@@ -161,12 +161,9 @@ const AssetDetail = () => {
                             onError={handleMediaError}
                             style={{display: audioLoading ? 'none' : 'block'}}
                         >
-                            <source src={mediaUrl} type={ 
-                                mediaUrl.endsWith(".mp3") ? "audio/mpeg" :
-                                mediaUrl.endsWith(".m4a") ? "audio/mp4" :
-                                mediaUrl.endsWith(".wav") ? "audio/wav" :
-                                "audio/*" } 
-                            />
+                            <source src={mediaUrl} type= "audio/mpeg" />
+                            <source src={mediaUrl} type= "audio/mp4" />
+                            <source src={mediaUrl} type= "audio/wav" />                         
                             It seems your browser does not support audio playback.
                         </audio>
                     </div>
