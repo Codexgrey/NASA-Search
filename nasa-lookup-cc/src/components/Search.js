@@ -114,7 +114,7 @@ const Search = () => {
                         className="home-icon"
                         title="Home" 
                     />
-                    <h5> NASA Search </h5>
+                    <h5> NASA Media Library API </h5>
                 </div>
         
                 <p>Enter query and <strong>select media type(s) </strong> to enable search. </p>
