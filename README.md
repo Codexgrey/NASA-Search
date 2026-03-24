@@ -1,5 +1,5 @@
 # LIVE AT:
-- https://codexgrey.github.io/NASA-Search/
+- https://codexgrey.github.io/NASA-Media-Library-API/
 
 
 
@@ -31,7 +31,7 @@ nasa-lookup-cc/               \
 - `cd nasa-lookup-cc` 
 - `npm install`
 - `npm start`
-- View app in your local environment at - `http://localhost:[port]/NASA-Search/nasa-lookup-cc/`
+- View app in your local environment at - `http://localhost:[port]/NASA-Media-Library-API/nasa-lookup-cc/`
 
 
 ## CARD COLORS
